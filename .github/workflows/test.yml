@@ -1,0 +1,7 @@
+name: Github Action Test
+on: [ push ]
+jobs:
+    Explore-GitHub-Actions:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "pass 1"
