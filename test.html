@@ -4,103 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuitarEik Web</title>
+    <title>Download GuitarEik - Your Ultimate Guitar Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .chord {
-            color: #3b82f6;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        pre {
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.8;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-50 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+<body class="bg-slate-50 text-slate-900 font-sans">
 
-    <!-- Navigation / Header -->
-    <nav
-        class="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800 sticky top-0 z-10">
-        <h1 class="text-xl font-bold tracking-tight">GuitarEik</h1>
-        <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
-            🌙 / ☀️
-        </button>
-    </nav>
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 p-2 rounded-xl text-white">
+                <i class="fas fa-guitar text-2xl"></i>
+            </div>
+            <h1 class="text-2xl font-black tracking-tight text-slate-800">GuitarEik</h1>
+        </div>
+        <a href="#download"
+            class="bg-slate-800 text-white px-5 py-2 rounded-full font-medium hover:bg-slate-700 transition">Get App</a>
+    </header>
 
-    <main class="max-w-3xl mx-auto p-6">
-        <!-- Controls -->
-        <div
-            class="flex flex-wrap gap-4 mb-8 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border dark:border-gray-700">
-            <div>
-                <span class="block text-xs font-semibold uppercase text-gray-500 mb-1">Transpose</span>
-                <div class="flex items-center gap-2">
-                    <button onclick="changeKey(-1)"
-                        class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">-</button>
-                    <span id="currentKey" class="w-8 text-center font-bold text-lg">C</span>
-                    <button onclick="changeKey(1)"
-                        class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">+</button>
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-blue-600 font-bold tracking-widest uppercase text-sm">Now Available</span>
+            <h2 class="text-5xl md:text-6xl font-black mt-4 leading-tight">Learn Guitar <br><span
+                    class="text-blue-600">Anywhere.</span></h2>
+            <p class="mt-6 text-lg text-slate-600 leading-relaxed">
+                သင့်ရဲ့ စိတ်ကြိုက်သီချင်းစာသားနဲ့ ကော့ဒ်တွေကို တစ်နေရာတည်းမှာ ရှာဖွေပါ။ Auto-scroll နဲ့ Transpose
+                feature တွေပါဝင်တဲ့ GuitarEik App ကို အခုပဲ ဒေါင်းလုဒ်ရယူလိုက်ပါ။
+            </p>
+
+            <div class="mt-10 flex flex-wrap gap-4" id="download">
+                <!-- Download Button -->
+                <a href="YOUR_APK_LINK_HERE"
+                    class="flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all duration-300">
+                    <i class="fab fa-android text-3xl"></i>
+                    <div class="text-left">
+                        <p class="text-xs opacity-80">Download for</p>
+                        <p class="text-xl font-bold leading-tight">Android APK</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- App Preview / Image Mockup -->
+        <div class="relative flex justify-center">
+            <div
+                class="w-64 h-[500px] bg-slate-800 rounded-[3rem] border-[8px] border-slate-900 shadow-2xl relative overflow-hidden">
+                <!-- Mockup Content -->
+                <div class="bg-blue-600 h-24 p-6 text-white pt-10">
+                    <p class="text-[10px] uppercase font-bold opacity-70">Playing Now</p>
+                    <p class="text-sm font-bold">Example Song</p>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="h-2 w-20 bg-slate-200 rounded"></div>
+                    <div class="h-2 w-32 bg-slate-200 rounded"></div>
+                    <div class="h-2 w-24 bg-slate-200 rounded"></div>
                 </div>
             </div>
-
-            <div>
-                <span class="block text-xs font-semibold uppercase text-gray-500 mb-1">Auto-Scroll</span>
-                <button id="scrollBtn"
-                    class="px-4 py-1 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50">Start</button>
+            <!-- Decorative circle -->
+            <div
+                class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-100 rounded-full blur-3xl">
             </div>
         </div>
+    </section>
 
-        <!-- Lyrics/Chords Content -->
-        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border dark:border-gray-700 overflow-x-auto">
-            <h2 class="text-2xl font-bold mb-2">Example Song Title</h2>
-            <p class="text-gray-500 mb-6 italic">Artist Name</p>
-
-            <pre id="content">
-<span class="chord">C</span>             <span class="chord">G</span>
-I'm just a coder on a Tuesday night
-<span class="chord">Am</span>            <span class="chord">F</span>
-Watching the Nginx logs fly by
-            </pre>
+    <!-- Features Section -->
+    <section class="bg-white py-20 border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl font-bold">Key Features</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100">
+                    <i class="fas fa-arrows-alt-v text-blue-600 text-2xl mb-4"></i>
+                    <h4 class="text-xl font-bold mb-2 text-slate-800">Auto-Scroll</h4>
+                    <p class="text-slate-600">တီးနေရင်း ဖုန်း screen ကို အပေါ်ဆွဲတင်စရာမလိုဘဲ အလိုအလျောက် scroll
+                        လုပ်ပေးမယ့် feature။</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100">
+                    <i class="fas fa-music text-blue-600 text-2xl mb-4"></i>
+                    <h4 class="text-xl font-bold mb-2 text-slate-800">Transposition</h4>
+                    <p
+                        class="text-slate-600 text-slate-800 text-slate-800 text-slate-800 text-slate-800 text-slate-800 text-slate-800 text-slate-800">
+                        ကိုယ့်အသံနဲ့ အဆင်ပြေမယ့် Key ကို အတိုးအလျှော့ အလွယ်တကူ ပြုလုပ်နိုင်ခြင်း။</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100">
+                    <i class="fas fa-moon text-blue-600 text-2xl mb-4"></i>
+                    <h4 class="text-xl font-bold mb-2 text-slate-800">Dark Mode</h4>
+                    <p class="text-slate-600">ညဘက်တီးတဲ့အခါ မျက်စိမပင်ပန်းစေဖို့ Dark Mode toggle ပါဝင်ပါတယ်။</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <script>
-        // Dark Mode Logic
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-        });
+    <!-- Footer -->
+    <footer class="py-12 text-center text-slate-500 text-sm">
+        <p>&copy; 2026 GuitarEik App. Built by Phyoe Wai Heim.</p>
+    </footer>
 
-        // Transposition Logic
-        const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-        let keyIndex = 0;
-
-        function changeKey(dir) {
-            keyIndex = (keyIndex + dir + 12) % 12;
-            document.getElementById('currentKey').innerText = keys[keyIndex];
-            // In a full app, you would iterate through chord elements and shift their values
-        }
-
-        // Auto-Scroll Logic
-        let scrolling = false;
-        let scrollInterval;
-        const scrollBtn = document.getElementById('scrollBtn');
-
-        scrollBtn.addEventListener('click', () => {
-            scrolling = !scrolling;
-            scrollBtn.innerText = scrolling ? 'Stop' : 'Start';
-            if (scrolling) {
-                scrollInterval = setInterval(() => {
-                    window.scrollBy(0, 1);
-                }, 50);
-            } else {
-                clearInterval(scrollInterval);
-            }
-        });
-    </script>
 </body>
 
 </html>
