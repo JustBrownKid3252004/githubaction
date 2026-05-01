@@ -1,4 +1,4 @@
-name: Flutter Multi-Platform Build
+name: GuitarEik Android Build
 on: [ push ]
 
 jobs:
