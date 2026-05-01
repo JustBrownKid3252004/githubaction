@@ -30,6 +30,20 @@ jobs:
                   # all_in_one folder ထဲကို အရင်ဝင်ရပါမယ်
                   cd all_in_one/build/windows/x64/runner/Release
                   tar -cvzf ../../../../GuitarEik_Windows.zip *
+            - name: Upload Zip File
+              uses: actions/upload-artifact@v4
+              with:
+                  name: windows-zip
+                  path: GuitarEik_Windows.zip
+
+    send-telegram:
+        needs: window-build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v4.1.7
+              with:
+                  name: windows-zip
 
             - name: Window File Sending
               uses: appleboy/telegram-action@master
