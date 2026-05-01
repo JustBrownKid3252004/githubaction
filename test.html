@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuitarEik Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chord {
+            color: #3b82f6;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navigation / Header -->
+    <nav
+        class="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800 sticky top-0 z-10">
+        <h1 class="text-xl font-bold tracking-tight">GuitarEik</h1>
+        <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+            🌙 / ☀️
+        </button>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-6">
+        <!-- Controls -->
+        <div
+            class="flex flex-wrap gap-4 mb-8 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border dark:border-gray-700">
+            <div>
+                <span class="block text-xs font-semibold uppercase text-gray-500 mb-1">Transpose</span>
+                <div class="flex items-center gap-2">
+                    <button onclick="changeKey(-1)"
+                        class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">-</button>
+                    <span id="currentKey" class="w-8 text-center font-bold text-lg">C</span>
+                    <button onclick="changeKey(1)"
+                        class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">+</button>
+                </div>
+            </div>
+
+            <div>
+                <span class="block text-xs font-semibold uppercase text-gray-500 mb-1">Auto-Scroll</span>
+                <button id="scrollBtn"
+                    class="px-4 py-1 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50">Start</button>
+            </div>
+        </div>
+
+        <!-- Lyrics/Chords Content -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border dark:border-gray-700 overflow-x-auto">
+            <h2 class="text-2xl font-bold mb-2">Example Song Title</h2>
+            <p class="text-gray-500 mb-6 italic">Artist Name</p>
+
+            <pre id="content">
+<span class="chord">C</span>             <span class="chord">G</span>
+I'm just a coder on a Tuesday night
+<span class="chord">Am</span>            <span class="chord">F</span>
+Watching the Nginx logs fly by
+            </pre>
+        </div>
+    </main>
+
+    <script>
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        // Transposition Logic
+        const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        let keyIndex = 0;
+
+        function changeKey(dir) {
+            keyIndex = (keyIndex + dir + 12) % 12;
+            document.getElementById('currentKey').innerText = keys[keyIndex];
+            // In a full app, you would iterate through chord elements and shift their values
+        }
+
+        // Auto-Scroll Logic
+        let scrolling = false;
+        let scrollInterval;
+        const scrollBtn = document.getElementById('scrollBtn');
+
+        scrollBtn.addEventListener('click', () => {
+            scrolling = !scrolling;
+            scrollBtn.innerText = scrolling ? 'Stop' : 'Start';
+            if (scrolling) {
+                scrollInterval = setInterval(() => {
+                    window.scrollBy(0, 1);
+                }, 50);
+            } else {
+                clearInterval(scrollInterval);
+            }
+        });
+    </script>
+</body>
+
+</html>
