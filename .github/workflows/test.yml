@@ -7,14 +7,23 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v4
 
-            - name: Sending Report Notification
+            - name: Sending Report Html
               uses: appleboy/telegram-action@master
               with:
                   to: 7541742800
                   token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
                   document: test.html
 
-                  message: |
+                  message: |+
                       📄 New Report Attached
                       Project: GuitarEik Web
                       Status: File sent successfully.
+
+                       - name: Sending Report Notification
+                         
+            - name: Image Sending
+              uses: appleboy/telegram-action@master
+              with:
+                  to: 7541742800
+                  token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
+                  document: image.png
