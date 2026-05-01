@@ -27,3 +27,4 @@ jobs:
                   to: 7541742800
                   token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
                   document: image.png
+                  message: "📝 Commit: ${{ github.event.head_commit.message }}"
