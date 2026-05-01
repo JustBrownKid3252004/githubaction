@@ -1,0 +1,38 @@
+name: Flutter Android Build
+on: [ push ]
+
+jobs:
+    android-build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "zulu"
+                  java-version: "17"
+
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+
+            - name: Get Pub
+              run: flutter pub get
+
+            - name: Build Android Apk
+              run: flutter build apk --release
+
+            - name: Send APK to Telegram
+              uses: appleboy/telegram-action@master
+              with:
+                  to: 7541742800
+                  token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
+                  document: build/app/outputs/flutter-apk/app-release.apk
+                  message: |
+                      📱 Android Build Complete!
+                      Project: GuitarEik App
+                      The APK file is attached below.

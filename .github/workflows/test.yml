@@ -19,7 +19,6 @@ jobs:
                       Project: GuitarEik Web
                       Status: File sent successfully.
 
-                       - name: Sending Report Notification
                          
             - name: Image Sending
               uses: appleboy/telegram-action@master
@@ -27,4 +26,4 @@ jobs:
                   to: 7541742800
                   token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
                   document: image.png
-                  message: "📝 Commit: ${{ github.event.head_commit.message }}"
+                  message: "Commit: ${{ github.event.head_commit.message }}"

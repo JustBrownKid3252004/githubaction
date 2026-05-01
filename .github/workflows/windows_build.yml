@@ -1,0 +1,39 @@
+name: Flutter Window Build
+on: [ push ]
+jobs:
+    window-build:
+        runs-on: windows-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Setup Flutter
+              uses: flutter-actions/setup-flutter@v4
+              with:
+                  channel: stable
+
+            - name: Get Pub
+              run: flutter pub get
+
+            - name: Enable Window
+              run: flutter config --enable-windows-desktop
+
+            - name: Build Window
+              run: flutter build windows --release
+
+            - name: Archive Build
+              shell: bash
+              run: |
+                  cd build/windows/x64/runner/Release
+                  tar -cvzf ../../../../GuitarEik_Windows.zip *
+
+            - name: Window File Sending
+              uses: appleboy/telegram-action@master
+              with:
+                  to: 7541742800
+                  token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
+                  document: GuitarEik_Windows.zip
+                  message: |
+                      🖥️ Windows Build Complete!
+                      Project: GuitarEik Web
+                      The compressed .zip file is attached.
