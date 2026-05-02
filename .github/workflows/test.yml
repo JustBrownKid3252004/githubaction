@@ -1,29 +1,39 @@
 name: Github Action Test
-on: [ push ]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 17 * * *"
+
 jobs:
-    Explore-GitHub-Actions:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v4
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: MySql Install
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
 
-            - name: Sending Report Html
-              uses: appleboy/telegram-action@master
-              with:
-                  to: 7541742800
-                  token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
-                  document: test.html
+      - name: Data Backup
+        env:
+          TIDB_PASSWORD: "aJalANIisq9uZ1jw"
+        run: |
+          mkdir -p backups
+          FILE_NAME="backups/backup_$(date +%Y-%m-%d).sql"
+          mysqldump -h gateway01.ap-southeast-1.prod.aws.tidbcloud.com \
+                    -P 4000 \
+                    -u 3dxcbofxwG5opNq.root \
+                    -p"$TIDB_PASSWORD" \
+                    guitar_eik > $FILE_NAME
+          # အောက်က echo ကို အပေါ်က mysqldump နဲ့ တန်းညှိထားဖို့ လိုပါတယ်
+          echo "BACKUP_FILE=$FILE_NAME" >> $GITHUB_ENV
 
-                  message: |+
-                      📄 New Report Attached
-                      Project: GuitarEik Web
-                      Status: File sent successfully.
-
-                         
-            - name: Image Sending
-              uses: appleboy/telegram-action@master
-              with:
-                  to: 7541742800
-                  token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
-                  document: image.png
-                  message: "Commit: ${{ github.event.head_commit.message }}"
+      - name: Send Backup to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: 7541742800
+          token: 8444003669:AAHZ0AynBvuR6pfogoim-sV8xEYwP1ytpko
+          document: ${{ env.BACKUP_FILE }}
+          message: |
+            📄 New Backup Attached
+            Project: GuitarEik Web
+            Status: Database backup completed successfully.
+            Date: ${{ github.event.head_commit.timestamp }}
+            Status: File sent successfully.
